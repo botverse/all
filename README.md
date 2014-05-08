@@ -6,12 +6,15 @@ The tool for managing all the UI repos
 
 ```bash
 $ git clone git@githubenterprise.pur3.net:fonz/all.git
+```
+
+Here a link is placed within `$PATH` scope, a local bin directory `~/.local/bin` is created and added to the `$PATH`
+
+```bash
 $ mkdir -p ~/.local/bin
 $ ln -s ~/REPO_LOCATION/all ~/.local/bin/all
 $ echo "export PATH=$PATH:~/.local/bin" >> ~/.bash_profile
 ```
-
-Place the file within your `$PATH`, I did it in `~/.local/bin` as I have it is already in my `$PATH`
 
 ## usage
 
