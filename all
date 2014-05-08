@@ -1,12 +1,26 @@
 #!/bin/bash
 
+if hash hub 2>/dev/null; then
+  cmd=hub
+else
+  cmd=git
+fi
+
 if [ -z "$apps" ]; then
   apps='./ '$(ls -d app/*/);
 fi
 
 initial=${PWD%%/};
 
-params=$@
+params=""
+
+for arg; do
+  case "$arg" in *\ * )
+    arg="\""${arg//\"/\'}"\"" ;;
+  esac
+  params+=$arg" ";
+done;
+
 if [ -z "$params" ]; then
   params="status"
 fi
@@ -17,6 +31,6 @@ for i in $apps; do
   cd $path;
   bn='\e[1;36m'$(basename $PWD)'\e[0m';
   echo -e $bn;
-  git $params;
+  eval $cmd $params;
   echo "";
 done;
