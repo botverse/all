@@ -40,7 +40,7 @@ will be applied to the repos
 $ all pull upstream develop
 ```
 
-and so on...ace the file within your $PATH, I did it in ~/.local/bin as I have it is already in my $PATH
+and so on...
 
 **specify apps**
 
