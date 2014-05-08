@@ -1,14 +1,14 @@
 #!/bin/bash
 
-if [ -z $apps ]; then
+if [ -z "$apps" ]; then
   apps='./ '$(ls -d app/*/);
 fi
 
 initial=${PWD%%/};
 
 params=$@
-if [ -z $params ]; then
-  params="pull upstream develop"
+if [ -z "$params" ]; then
+  params="status"
 fi
 
 for i in $apps; do
