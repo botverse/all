@@ -1,0 +1,22 @@
+#!/bin/bash
+
+if [ -z $apps ]; then
+  apps='./ '$(ls -d app/*/);
+fi
+
+initial=${PWD%%/};
+
+params=$@
+if [ -z $params ]; then
+  params="pull upstream develop"
+fi
+
+for i in $apps; do
+  app=${i%%/};
+  path=$initial/${app##/};
+  cd $path;
+  bn='\e[1;36m'$(basename $PWD)'\e[0m';
+  echo -e $bn;
+  git $params;
+  echo "";
+done;
