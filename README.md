@@ -60,3 +60,14 @@ $ export apps='app/common app/editor'
 $ all status # will only do common and editor
 ```
 
+## pull requests
+
+once you have create the branch and done all your commits you probably want to make a pull request to every repo
+
+you need the [https://github.com/github/hub](github-cli) wrapper for this
+
+```bash
+$ all pull-request -m "message of pull request" -b upstream:develop -h origin:MY_FEATURE
+```
+
+
