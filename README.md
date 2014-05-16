@@ -60,6 +60,17 @@ $ export apps='app/common app/editor'
 $ all status # will only do common and editor
 ```
 
+**home folder**
+
+if you define  `ALL_HOME` to point to your bundle directory, you can call `all`
+from whichever directory:
+
+```bash
+$ echo export ALL_HOME=~/Projects/bundle >> ~/.bashrc
+```
+
+and then you can do `all status` from your editor directory, for example
+
 ## ~~pull requests~~
 
 ~~once you have create the branch and done all your commits you probably want to make a pull request to every repo

@@ -1,16 +1,18 @@
 #!/bin/bash
 
-if hash hub 2>/dev/null; then
-  cmd=hub
+cmd=git
+
+if [ -z "$ALL_HOME" ]; then
+  initial=${PWD%%/};
 else
-  cmd=git
+  initial=${ALL_HOME%%/};
 fi
+
+cd $initial;
 
 if [ -z "$apps" ]; then
   apps='./ '$(ls -d app/*/);
 fi
-
-initial=${PWD%%/};
 
 params=""
 
