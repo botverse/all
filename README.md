@@ -1,24 +1,64 @@
 # all
 
-The tool for managing all the UI repos
+Simple tool for managing several git repositories
 
-## installation
+## Installation
 
 ```bash
-$ git clone git@githubenterprise.pur3.net:fonz/all.git
+$ git clone git@github.com:botverse/all.git
 ```
 
-Here a link is placed within `$PATH` scope, a local bin directory `~/.local/bin` is created and added to the `$PATH`
+Put all within the `$PATH` scope.
+
+You can do this for example:
 
 ```bash
+# create a local bin directory
 $ mkdir -p ~/.local/bin
+# symlink the all script
 $ ln -s ~/REPO_LOCATION/all ~/.local/bin/all
+# add the created bin directory to the path scope
 $ echo "export PATH=$PATH:~/.local/bin" >> ~/.bash_profile
 ```
 
-## usage
+## Usage
 
-**no arguments**
+By default `all` will understand that all the sub directories of the current `CWD` are git repositories, so having this directory structure.
+
+```
+ └ ~/workspace/
+   ├ frontend/
+   ├ backend/
+   └ server/
+```
+
+you will be executing `all` in all the repos present in the current directory:
+
+```bash
+$ ~/workspace/$ all
+```
+
+you get:
+
+```
+frontend
+On branch bootstrapping
+nothing to commit, working directory clean
+
+backend
+On branch bootstrapping
+nothing to commit, working directory clean
+
+server
+On branch bootstrapping
+nothing to commit, working directory clean
+```
+
+You can tell `all` where the repositories are so you can execute it from *any* directory scope. Also you can specify which repositories to manage when working in a feature that won't affect all the repositories.
+
+Check the configuration section for more information.
+
+**calling `all` with no arguments**
 
 will apply `git status` to all repos
 
@@ -32,61 +72,41 @@ is equivalent to
 $ all status
 ```
 
-**any argument**
+**calling `all` with any argument**
 
 will be applied to the repos
 
 ```bash
-$ all pull upstream develop
+$ all pull upstream development
 ```
 
 and so on...
 
-**specify apps**
+## Configure
 
-if you are working in a specific set of applications, you have to define the apps var
+**Specify repos**
 
-beign bundle represented as `./`
+If you are working in a specific set of applications, you have to define the ALL_REPOS environment var:
 
 ```bash
-$ apps='./ app/common app/ui' all status
+$ ALL_REPOS='modules/http modules/rest' all status
 ```
 
-or define only once for that terminal session
+or define only once for that terminal session:
 
 ```bash
-$ export apps='app/common app/editor'
+$ export ALL_REPOS='modules/http modules/rest'
 ...
-$ all status # will only do common and editor
+$ all status # will only check http and rest
 ```
 
-**home folder**
+**Home folder**
 
-if you define  `ALL_HOME` to point to your bundle directory, you can call `all`
+If you define  `ALL_HOME` to point to your workspace directory, you can call `all`
 from whichever directory:
 
 ```bash
-$ echo export ALL_HOME=~/Projects/bundle >> ~/.bashrc
+$ echo export ALL_HOME=~/workspace >> ~/.bashrc
 ```
 
-and then you can do `all status` from your editor directory, for example
-
-## ~~pull requests~~
-
-~~once you have create the branch and done all your commits you probably want to make a pull request to every repo
-
-you need the [https://github.com/github/hub](github-cli) wrapper for this
-
-also you need to configure the githubenterprise installation like this:
-
-```bash
-$ git config --global --add hub.host githubenterprise.pur3.net
-```
-
-then you are ready to go:
-
-```bash
-$ all pull-request -m "message of pull request" -b upstream:develop -h origin:MY_FEATURE
-```
-~~
-
+and then you can do `all status` from the module directory you are currently working on.

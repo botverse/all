@@ -10,8 +10,8 @@ fi
 
 cd $initial;
 
-if [ -z "$apps" ]; then
-  apps='./ '$(ls -d app/*/);
+if [ -z "$ALL_REPOS" ]; then
+  ALL_REPOS=$(ls -d ./*/);
 fi
 
 params=""
@@ -27,7 +27,7 @@ if [ -z "$params" ]; then
   params="status"
 fi
 
-for i in $apps; do
+for i in $ALL_REPOS; do
   app=${i%%/};
   path=$initial/${app##/};
   cd $path;
