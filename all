@@ -1,6 +1,10 @@
 #!/bin/bash
 
-cmd=git
+if hash hub 2>/dev/null; then
+  cmd=hub
+else
+  cmd=git
+fi
 
 if [ -z "$ALL_HOME" ]; then
   initial=${PWD%%/};
