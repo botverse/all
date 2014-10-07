@@ -35,7 +35,7 @@ for i in $ALL_REPOS; do
   app=${i%%/};
   path=$initial/${app##/};
   cd $path;
-  bn='\e[1;36m'$(basename $PWD)'\e[0m';
+  bn='\033[1;36m'$(basename $PWD)'\033[0m';
   echo -e $bn;
   eval $cmd $params;
   echo "";
